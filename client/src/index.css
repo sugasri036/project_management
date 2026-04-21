@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ... */
+html,
+hody {
+  height: 100%;
+  font-family: "DM Sans", serif !important;
+}
+
+em-emoji-picker {
+  width: 350px;
+  height: 400px;
+  resize: horizontal;
+  overflow: auto;
+}
+
+/* Custom scrollbar styles */
+.scrollbar {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  /* Firefox */
+  scrollbar-color: rgba(176, 174, 174, 0.7) #ddd;
+  /* Firefox */
+  transition: scrollbar-color 0.3s ease, scrollbar-width 0.3s ease;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+  /* Scrollbar width */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #ddd;
+  /* Track color */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: gray;
+  /* Thumb color */
+  border-radius: 100%;
+  /* Rounded edges */
+  transition: background-color 0.3s ease;
+  /* Smooth color change */
+}
+
+.scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: darkgray;
+  /* Hover effect */
+}
+
+@layer base {
+  :root {
+    /* Main Background: Soft Cream / Warm White */
+    --background: 40 20% 99%; 
+    --foreground: 224 71.4% 4.1%; /* Deep Navy Black */
+
+    /* Card: Pure White with warm tint */
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+
+    /* Popover: Matches Card */
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+
+    /* Primary: Royal Sunset (Deep Purple-Blue) */
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 20% 98%;
+
+    /* Secondary: Warm Beige/Sand */
+    --secondary: 35 30% 96%;
+    --secondary-foreground: 220.9 39.3% 11%;
+
+    /* Muted: Soft Warm Gray */
+    --muted: 35 20% 96%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    /* Accent: Soft Gold/Peach Wash */
+    --accent: 35 30% 96%;
+    --accent-foreground: 220.9 39.3% 11%;
+
+    /* Destructive: Soft Red */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+
+    /* Border: Warm Mist */
+    --border: 220 13% 91%; /* Neutral to keep structure clean */
+    --input: 220 13% 91%;
+    --ring: 262.1 83.3% 57.8%; /* Matches Primary */
+
+    /* Radius */
+    --radius: 0.75rem; /* Slightly rounder for modern feel */
+
+    /* Chart Colors - Vibrant/Warm */
+    --chart-1: 262 83% 58%; /* Purple */
+    --chart-2: 35 90% 60%;  /* Golden Orange */
+    --chart-3: 173 58% 39%; /* Teal */
+    --chart-4: 340 75% 55%; /* Pink */
+    --chart-5: 200 80% 60%; /* Sky Blue */
+
+    /* Sidebar: Frosted Warmth */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 262.1 83.3% 57.8%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 35 30% 96%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 262.1 83.3% 57.8%;
+
+    /* Light Mode Gradient: Warm Dawn */
+    --bg-gradient: radial-gradient(circle at 0% 0%, rgba(255, 182, 193, 0.15), transparent 30%), /* Soft Pink top left */
+                   radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.1), transparent 30%), /* Violet bottom right */
+                   #fffbf7; /* Warm base */
+  }
+
+  .dark {
+    /* Main Background: Absolute Void */
+    --background: 240 10% 4%; 
+    --foreground: 0 0% 98%;
+
+    /* Card: Deep Void Glass */
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+
+    /* Popover: Matches Card */
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Primary: Neon Electric Violet */
+    --primary: 263 75% 60%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Secondary: Deep Night */
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Muted: Starlight Gray */
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+
+    /* Accent: Neon Cyan Wash */
+    --accent: 263 75% 60%; 
+    --accent-foreground: 210 40% 98%;
+
+    /* Destructive: Neon Red */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Border: Translucent Galaxy */
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 263 75% 60%;
+
+    /* Chart Colors - Neon Cyberpunk */
+    --chart-1: 263 75% 60%; /* Neon Violet */
+    --chart-2: 180 100% 50%; /* Cyan */
+    --chart-3: 300 100% 60%; /* Magenta */
+    --chart-4: 50 100% 60%;  /* Neon Yellow */
+    --chart-5: 10 100% 65%;  /* Neon Orange */
+
+    /* Sidebar: Void Glass */
+    --sidebar-background: 240 10% 4%;
+    --sidebar-foreground: 240 5% 96%;
+    --sidebar-primary: 263 75% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 240 5% 96%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 263 75% 60%;
+
+    /* Dark Mode Gradient Variable: Nebula */
+    --bg-gradient: radial-gradient(circle at 10% 20%, rgba(76, 29, 149, 0.3), transparent 40%), /* Violet Nebula */
+                   radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.15), transparent 40%), /* Cyan Star-field */
+                   #09090b; /* Deep Void base */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  button[data-placeholder] {
+    @apply text-muted-foreground;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/40 dark:bg-black/40 backdrop-blur-2xl border border-white/30 dark:border-white/10 shadow-xl;
+  }
+
+  .glass-card {
+    @apply bg-white/30 dark:bg-gray-900/40 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+
+  /* MacOS-like Scrollbar for Glass Theme */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/30 dark:bg-white/10 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/50 dark:bg-white/20;
+  }
+}
+
+/* Global Background Gradient */
+body {
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
