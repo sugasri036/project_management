@@ -37,3 +37,33 @@ export const protectedRoutePaths = [
 export const baseRoutePaths = [
   { path: BASE_ROUTE.INVITE_URL, element: <InviteUser /> },
 ];
+
+import { Routes, Route } from "react-router-dom";
+
+const AppRoutes = () => {
+  return (
+    <Routes>
+
+  {/* AUTH ROUTES */}
+  {authenticationRoutePaths.map((route, index) => (
+    <Route key={index} path={route.path} element={route.element} />
+  ))}
+
+  {/* ✅ ADD THIS HERE */}
+  <Route path="/auth/success" element={<AuthSuccess />} />
+
+  {/* PROTECTED ROUTES */}
+  {protectedRoutePaths.map((route, index) => (
+    <Route key={index} path={route.path} element={route.element} />
+  ))}
+
+  {/* BASE ROUTES */}
+  {baseRoutePaths.map((route, index) => (
+    <Route key={index} path={route.path} element={route.element} />
+  ))}
+
+</Routes>
+  );
+};
+
+export default AppRoutes;
