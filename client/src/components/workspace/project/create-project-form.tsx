@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ProjectStatusEnum, ProjectStatusEnumType } from "@/constant";
+import { ProjectStatusEnum } from "@/constant";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

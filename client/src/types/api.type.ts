@@ -1,4 +1,5 @@
-PermissionType,
+import {
+  PermissionType,
   ProjectStatusEnumType,
   TaskPriorityEnumType,
   TaskStatusEnumType,
