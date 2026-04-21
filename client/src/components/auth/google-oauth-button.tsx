@@ -4,7 +4,7 @@ const GoogleOauthButton = (props: { label: string }) => {
   const { label } = props;
 
   const handleClick = () => {
-    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
+    window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`;
   };
   return (
     <Button
