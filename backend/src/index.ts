@@ -23,7 +23,7 @@ import commentRoutes from "./routes/comment.route";
 import activityRoutes from "./routes/activity.route";
 import searchRoutes from "./routes/search.route";
 import discussionRoutes from "./routes/discussion.routes";
-import cookieSession from "cookie-session";
+import session from "express-session";
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;
@@ -33,12 +33,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(
-  cookieSession({
-    name: "session",
-    keys: [config.SESSION_SECRET],
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    secure: true,        // ✅ IMPORTANT
-    sameSite: "none",    // ✅ IMPORTANT
+  session({
+    secret: config.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+    },
   })
 );
 
