@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
-import session from "cookie-session";
+import session from "express-session";
 import { config } from "./config/app.config";
 import connectDatabase from "./config/database.config";
 import { errorHandler } from "./middlewares/errorHandler.middleware";
@@ -23,7 +23,6 @@ import commentRoutes from "./routes/comment.route";
 import activityRoutes from "./routes/activity.route";
 import searchRoutes from "./routes/search.route";
 import discussionRoutes from "./routes/discussion.routes";
-import session from "express-session";
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;
