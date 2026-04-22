@@ -88,10 +88,22 @@ export const logOutController = asyncHandler(
       }
     });
 
-    req.session = null;
+   export const logOutController = asyncHandler(
+  async (req: Request, res: Response) => {
+    req.logout((err) => {
+      if (err) {
+        console.error("Logout error:", err);
+        return res
+          .status(HTTPSTATUS.INTERNAL_SERVER_ERROR)
+          .json({ error: "Failed to log out" });
+      }
 
-    return res
-      .status(HTTPSTATUS.OK)
-      .json({ message: "Logged out successfully" });
+      req.session.destroy(() => {
+        res.clearCookie("connect.sid"); // important
+        return res
+          .status(HTTPSTATUS.OK)
+          .json({ message: "Logged out successfully" });
+      });
+    });
   }
 );
