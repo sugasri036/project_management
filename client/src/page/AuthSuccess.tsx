@@ -8,10 +8,13 @@ const AuthSuccess = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        // 🔥 VERY IMPORTANT: fetch logged-in user
-        const res = await axios.get("http://localhost:5000/api/user/me", {
-          withCredentials: true, // required for session cookie
-        });
+        // ✅ FIX: use environment variable instead of localhost
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/user/me`,
+          {
+            withCredentials: true, // required for session cookie
+          }
+        );
 
         console.log("User:", res.data);
 
@@ -27,7 +30,7 @@ const AuthSuccess = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [navigate]);
 
   return <div>Logging you in...</div>;
 };

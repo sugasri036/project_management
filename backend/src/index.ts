@@ -31,28 +31,30 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
+import cors from "cors";
+
+app.use(
+  cors({
+    origin: "https://project-management-xzfs.onrender.com", 
+    credentials: true,
+  })
+);
+
 app.use(
   session({
-    secret: config.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || "secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: true,
+      secure: true,       // REQUIRED for HTTPS (Render)
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "none",   // REQUIRED for cross-origin
     },
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(
-  cors({
-    origin: config.FRONTEND_ORIGIN,
-    credentials: true,
-  })
-);
 
 app.get(
   `/`,
