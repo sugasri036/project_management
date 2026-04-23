@@ -2,6 +2,7 @@ import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import { config } from "./config/app.config";
 import connectDatabase from "./config/database.config";
 import { errorHandler } from "./middlewares/errorHandler.middleware";
@@ -9,6 +10,7 @@ import { HTTPSTATUS } from "./config/http.config";
 import { asyncHandler } from "./middlewares/asyncHandler.middleware";
 import { BadRequestException } from "./utils/appError";
 import { ErrorCodeEnum } from "./enums/error-code.enum";
+
 
 import "./config/passport.config";
 import passport from "passport";
@@ -43,10 +45,16 @@ app.use(
     secret: process.env.SESSION_SECRET || "secret",
     resave: false,
     saveUninitialized: false,
+
+    // ✅ ADD THIS BLOCK
+    store: MongoStore.create({
+      mongoUrl: config.MONGO_URI,
+    }),
+
     cookie: {
-      secure: true,       // REQUIRED for HTTPS (Render)
+      secure: true,
       httpOnly: true,
-      sameSite: "none",   // REQUIRED for cross-origin
+      sameSite: "none",
     },
   })
 );
