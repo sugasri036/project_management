@@ -13,16 +13,15 @@ export const googleLoginCallback = asyncHandler(
 
     if (!currentWorkspace) {
       return res.redirect(
-        `${config.FRONTEND_GOOGLE_CALLBACK_URL}?status=failure`
+        `${config.FRONTEND_GOOGLE_CALLBACK_URL}?status=failure`,
       );
     }
 
     return res.redirect(
-      `${config.FRONTEND_ORIGIN}/auth/success?workspace=${currentWorkspace}`
+      `${config.FRONTEND_ORIGIN}/auth/success?workspace=${currentWorkspace}`,
     );
-  }
+  },
 ); // ✅ THIS WAS MISSING
-
 
 // REGISTER
 export const registerUserController = asyncHandler(
@@ -36,9 +35,8 @@ export const registerUserController = asyncHandler(
     return res.status(HTTPSTATUS.CREATED).json({
       message: "User created successfully",
     });
-  }
+  },
 );
-
 
 // LOGIN
 export const loginController = asyncHandler(
@@ -48,7 +46,7 @@ export const loginController = asyncHandler(
       (
         err: Error | null,
         user: Express.User | false,
-        info: { message: string } | undefined
+        info: { message: string } | undefined,
       ) => {
         if (err) {
           return next(err);
@@ -70,13 +68,11 @@ export const loginController = asyncHandler(
             user,
           });
         });
-      }
+      },
     )(req, res, next);
-  }
+  },
 );
 
-
-// LOGOUT
 export const logOutController = asyncHandler(
   async (req: Request, res: Response) => {
     req.logout((err) => {
@@ -86,24 +82,24 @@ export const logOutController = asyncHandler(
           .status(HTTPSTATUS.INTERNAL_SERVER_ERROR)
           .json({ error: "Failed to log out" });
       }
-    });
 
-   export const logOutController = asyncHandler(
-  async (req: Request, res: Response) => {
-    req.logout((err) => {
-      if (err) {
-        console.error("Logout error:", err);
-        return res
-          .status(HTTPSTATUS.INTERNAL_SERVER_ERROR)
-          .json({ error: "Failed to log out" });
-      }
+      if (req.session) {
+        req.session.destroy((err) => {
+          if (err) {
+            console.error("Session destroy error:", err);
+          }
 
-      req.session.destroy(() => {
-        res.clearCookie("connect.sid"); // important
+          res.clearCookie("connect.sid");
+
+          return res
+            .status(HTTPSTATUS.OK)
+            .json({ message: "Logged out successfully" });
+        });
+      } else {
         return res
           .status(HTTPSTATUS.OK)
           .json({ message: "Logged out successfully" });
-      });
+      }
     });
-  }
+  },
 );
