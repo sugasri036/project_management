@@ -46,6 +46,8 @@ app.use(
     resave: false,
     saveUninitialized: false,
 
+    proxy: true,
+
     // ✅ ADD THIS BLOCK
     store: MongoStore.create({
       mongoUrl: config.MONGO_URI,
